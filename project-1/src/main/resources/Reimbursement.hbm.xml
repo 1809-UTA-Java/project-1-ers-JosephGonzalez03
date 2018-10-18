@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.revature.model.Reimbursement" table="ers_reimbursements">
+		<id name="id" column="r_id" type="integer">
+			<generator class="native"/>
+		</id>
+		<property name="amount" column="r_amount" type="double"/>
+		<property name="description" column="r_description" type="string"/>
+		<property name="recipt" column="r_receipt" type="binary"/>
+		<property name="submitted_ts" column="r_submitted" type="timestamp"/>
+		<property name="resolved_ts" column="r_resolved" type="timestamp"/>
+		<many-to-one name="author" class="com.revature.model.ErsUser" column="user_author" cascade="save-update"/>
+		<many-to-one name="resolver" class="com.revature.model.ErsUser" column="user_resolver" cascade="save-update"/>
+		<many-to-one name="reimbursementType" class="com.revature.model.Reimbursement" column="reimbursement_type" cascade="save-update"/>
+		<many-to-one name="reimbursementStatus" class="com.revature.model.Reimbursement" column="reimbursement_status" cascade="save-update"/>
+	</class>
+</hibernate-mapping>

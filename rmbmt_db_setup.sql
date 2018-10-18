@@ -1,4 +1,7 @@
 --erase all tables
+drop table ers_reimbursements;
+drop table ers_reimbursement_status;
+drop table ers_reimbursement_type;
 drop table ers_users;
 drop table ers_user_roles;
 
@@ -15,7 +18,7 @@ create table ers_users (
     u_firstname varchar2(30 byte),
     u_lastname varchar2(30 byte),
     u_email varchar2(100 byte) unique,
-    ur_id number(*,0) references ers_user_roles(ur_id)
+    user_role number(*,0) references ers_user_roles(ur_id)
 );
 
 create table ers_reimbursement_status (
@@ -35,8 +38,11 @@ create table ers_reimbursements (
     r_receipt blob,
     r_submitted timestamp,
     r_resolved timestamp,
-    u_id_author number(*,0) references ers_users(u_id),
-    u_id_resolver number(*,0) references ers_users(u_id),
-    rt_type number(*,0) references ers_reimbursement_type(rt_id),
-    rt_status number(*,0) references ers_reimbursement_status(rs_id)
+    user_author number(*,0) references ers_users(u_id),
+    user_resolver number(*,0) references ers_users(u_id),
+    reimbursement_type number(*,0) references ers_reimbursement_type(rt_id),
+    reimbursement_status number(*,0) references ers_reimbursement_status(rs_id)
 );
+
+select * from ers_users;
+select * from ers_user_roles;

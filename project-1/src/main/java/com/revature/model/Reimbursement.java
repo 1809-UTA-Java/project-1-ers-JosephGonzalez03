@@ -1,36 +1,39 @@
 package com.revature.model;
 
+import java.sql.Timestamp;
+
 public class Reimbursement {
 	private int id;
-	private int amount;
+	private double amount;
 	private String description;
-	private byte[] blob;
-	private String submit_ts;
-	private String resolved_ts;
-	private int id_author;
-	private int id_resolver;
-	private int type;
-	private int status;
+	private byte[] recipt;
+	private Timestamp submitted_ts;
+	private Timestamp resolved_ts;
+	private ErsUser author;
+	private ErsUser resolver;
+	private ReimbursementType reimbursementType;
+	private ReimbursementStatus reimbursementStatus;
 
-	public Reimbursement(int id, int amount, String description, byte[] blob, String submit_ts, String resolved_ts,
-			int id_author, int id_resolver, int type, int status) {
+	public Reimbursement(int id, double amount, String description, byte[] recipt, Timestamp submitted_ts,
+			Timestamp resolved_ts, ErsUser author, ErsUser resolver, ReimbursementType reimbursementType,
+			ReimbursementStatus reimbursementStatus) {
 		super();
 		this.id = id;
 		this.amount = amount;
 		this.description = description;
-		this.blob = blob;
-		this.submit_ts = submit_ts;
+		this.recipt = recipt;
+		this.submitted_ts = submitted_ts;
 		this.resolved_ts = resolved_ts;
-		this.id_author = id_author;
-		this.id_resolver = id_resolver;
-		this.type = type;
-		this.status = status;
+		this.author = author;
+		this.resolver = resolver;
+		this.reimbursementType = reimbursementType;
+		this.reimbursementStatus = reimbursementStatus;
 	}
-	
+
 	public Reimbursement() {
 		super();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -39,11 +42,11 @@ public class Reimbursement {
 		this.id = id;
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
@@ -55,60 +58,60 @@ public class Reimbursement {
 		this.description = description;
 	}
 
-	public byte[] getBlob() {
-		return blob;
+	public byte[] getRecipt() {
+		return recipt;
 	}
 
-	public void setBlob(byte[] blob) {
-		this.blob = blob;
+	public void setRecipt(byte[] recipt) {
+		this.recipt = recipt;
 	}
 
-	public String getSubmit_ts() {
-		return submit_ts;
+	public Timestamp getSubmitted_ts() {
+		return submitted_ts;
 	}
 
-	public void setSubmit_ts(String submit_ts) {
-		this.submit_ts = submit_ts;
+	public void setSubmitted_ts(Timestamp submitted_ts) {
+		this.submitted_ts = submitted_ts;
 	}
 
-	public String getResolved_ts() {
+	public Timestamp getResolved_ts() {
 		return resolved_ts;
 	}
 
-	public void setResolved_ts(String resolved_ts) {
+	public void setResolved_ts(Timestamp resolved_ts) {
 		this.resolved_ts = resolved_ts;
 	}
 
-	public int getId_author() {
-		return id_author;
+	public ErsUser getAuthor() {
+		return author;
 	}
 
-	public void setId_author(int id_author) {
-		this.id_author = id_author;
+	public void setAuthor(ErsUser author) {
+		this.author = author;
 	}
 
-	public int getId_resolver() {
-		return id_resolver;
+	public ErsUser getResolver() {
+		return resolver;
 	}
 
-	public void setId_resolver(int id_resolver) {
-		this.id_resolver = id_resolver;
+	public void setResolver(ErsUser resolver) {
+		this.resolver = resolver;
 	}
 
-	public int getType() {
-		return type;
+	public ReimbursementType getReimbursementType() {
+		return reimbursementType;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setReimbursementType(ReimbursementType reimbursementType) {
+		this.reimbursementType = reimbursementType;
 	}
 
-	public int getStatus() {
-		return status;
+	public ReimbursementStatus getReimbursementStatus() {
+		return reimbursementStatus;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setReimbursementStatus(ReimbursementStatus reimbursementStatus) {
+		this.reimbursementStatus = reimbursementStatus;
 	}
 
 }

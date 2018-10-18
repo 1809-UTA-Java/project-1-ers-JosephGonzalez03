@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.revature.model.ErsUser" table="ers_users">
+		<id name="id" column="u_id" type="integer">
+			<generator class="native"/>
+		</id>
+		<property name="username" column="u_username" type="string"/>
+		<property name="password" column="u_password" type="string"/>
+		<property name="firstName" column="u_firstname" type="string"/>
+		<property name="lastName" column="u_lastname" type="string"/>
+		<property name="email" column="u_email" type="string"/>
+		<many-to-one name="userRole" class="com.revature.model.UserRole" column="user_role" cascade="save-update"/>
+	</class>
+</hibernate-mapping>

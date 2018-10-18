@@ -8,9 +8,17 @@
 <body>
 	<h1>EMPLOYEE HOMEPAGE</h1>
 	<ul>
-		<li>View Personal Information</li>
-		<li>View all your reimbursements</li>
-		<li>Fill out new reimbursement form</li>
+		<li><a href="personalInfo.jsp">View Personal Information</a></li>
+		<li><a href="reimbursementHome.jsp">View all your
+				reimbursements</a></li>
+		<li><a href="reimbursementForm.jsp">Fill out new
+				reimbursement form</a></li>
 	</ul>
+
+	<form action="Logout" method="post">
+		<div>
+			<button type="submit">Logout</button>
+		</div>
+	</form>
 </body>
 </html>
