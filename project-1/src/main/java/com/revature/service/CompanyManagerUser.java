@@ -46,7 +46,7 @@ public class CompanyManagerUser extends ErsUser implements Manager {
 		if (rmbmtList.isEmpty()) {
 			return false;
 		} else {
-			req.getSession().setAttribute("reimbursements", rmbmtList);
+			req.getSession().setAttribute("pendingList", rmbmtList);
 			return true;
 		}
 	
@@ -60,7 +60,7 @@ public class CompanyManagerUser extends ErsUser implements Manager {
 		if (rmbmtList.isEmpty()) {
 			return false;
 		} else {
-			req.getSession().setAttribute("reimbursements", rmbmtList);
+			req.getSession().setAttribute("resolvedList", rmbmtList);
 			return true;
 		}
 	}
@@ -88,7 +88,7 @@ public class CompanyManagerUser extends ErsUser implements Manager {
 		if (rmbmtList.isEmpty()) {
 			return false;
 		} else {
-			req.getSession().setAttribute("reimbursements", rmbmtList);
+			req.getSession().setAttribute("requestList", rmbmtList);
 			return true;
 		}
 	}

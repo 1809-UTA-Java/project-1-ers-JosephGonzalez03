@@ -1,7 +1,17 @@
 package com.revature.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ers_reimbursement_type")
 public class ReimbursementType {
+	@Id
+	@Column(name="rt_id")
 	private int id;
+	@Column(name="rt_type")
 	private String type;
 
 	public ReimbursementType(int id, String type) {

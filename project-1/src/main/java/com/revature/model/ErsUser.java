@@ -1,6 +1,16 @@
 package com.revature.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="ers_users")
 public class ErsUser implements User {
 	@Override
 	public boolean equals(Object obj) {
@@ -8,12 +18,21 @@ public class ErsUser implements User {
 				this.username.contentEquals(((ErsUser) obj).getUsername()));
 	}
 
+	@Id
+	@Column(name="u_id")
 	private int id;
+	@Column(name="u_username")
 	private String username;
+	@Column(name="u_password")
 	private String password;
+	@Column(name="u_firstname")
 	private String firstName;
+	@Column(name="u_lastname")
 	private String lastName;
+	@Column(name="u_email")
 	private String email;
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="ur_id")
 	private UserRole userRole;
 
 	public ErsUser(int id, String username, String password, String firstName, String lastName,

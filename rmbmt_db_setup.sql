@@ -18,7 +18,7 @@ create table ers_users (
     u_firstname varchar2(30 byte),
     u_lastname varchar2(30 byte),
     u_email varchar2(100 byte) unique,
-    user_role number(*,0) references ers_user_roles(ur_id)
+    ur_id number(*,0) references ers_user_roles(ur_id)
 );
 
 create table ers_reimbursement_status (
@@ -38,11 +38,15 @@ create table ers_reimbursements (
     r_receipt blob,
     r_submitted timestamp,
     r_resolved timestamp,
-    user_author number(*,0) references ers_users(u_id),
-    user_resolver number(*,0) references ers_users(u_id),
-    reimbursement_type number(*,0) references ers_reimbursement_type(rt_id),
-    reimbursement_status number(*,0) references ers_reimbursement_status(rs_id)
+    u_id_author number(*,0) references ers_users(u_id),
+    u_id_resolver number(*,0) references ers_users(u_id),
+    rt_id number(*,0) references ers_reimbursement_type(rt_id),
+    rs_id number(*,0) references ers_reimbursement_status(rs_id)
 );
+
+insert into ers_user_roles values (100,'employee');
+insert into ers_user_roles values (101,'manager');
+commit;
 
 select * from ers_users;
 select * from ers_user_roles;

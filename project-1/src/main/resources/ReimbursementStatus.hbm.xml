@@ -6,7 +6,6 @@
 <hibernate-mapping>
 	<class name="com.revature.model.ReimbursementStatus" table="ers_reimbursement_status">
 		<id name="id" column="rs_id" type="integer">
-			<generator class="native"/>
 		</id>
 		<property name="status" column="rs_status" type="string"/>
 	</class>

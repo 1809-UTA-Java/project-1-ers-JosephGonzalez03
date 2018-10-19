@@ -6,13 +6,12 @@
 <hibernate-mapping>
 	<class name="com.revature.model.ErsUser" table="ers_users">
 		<id name="id" column="u_id" type="integer">
-			<generator class="native"/>
 		</id>
 		<property name="username" column="u_username" type="string"/>
 		<property name="password" column="u_password" type="string"/>
 		<property name="firstName" column="u_firstname" type="string"/>
 		<property name="lastName" column="u_lastname" type="string"/>
 		<property name="email" column="u_email" type="string"/>
-		<many-to-one name="userRole" class="com.revature.model.UserRole" column="user_role" cascade="save-update"/>
+		<many-to-one name="userRole" class="com.revature.model.UserRole" column="user_role" cascade="save-update, delete"/>
 	</class>
 </hibernate-mapping>

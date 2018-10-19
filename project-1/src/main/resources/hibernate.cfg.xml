@@ -17,10 +17,10 @@
 			org.hibernate.dialect.Oracle10gDialect
 		</property>
 		
-		<mapping resource="ErsUser.hbm.xml"/>
-		<mapping resource="Reimbursement.hbm.xml"/>
-		<mapping resource="ReimbursementStatus.hbm.xml"/>
-		<mapping resource="ReimbursementType.hbm.xml"/>
-		<mapping resource="UserRole.hbm.xml"/>
+		<mapping class="com.revature.model.ErsUser"/>
+		<mapping class="com.revature.model.Reimbursement"/>
+		<mapping class="com.revature.model.ReimbursementStatus"/>
+		<mapping class="com.revature.model.ReimbursementType"/>
+		<mapping class="com.revature.model.UserRole"/>
 	</session-factory>
 </hibernate-configuration>

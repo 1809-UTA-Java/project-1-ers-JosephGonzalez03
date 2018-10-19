@@ -3,13 +3,18 @@ package com.revature.service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.revature.model.ErsUser;
 import com.revature.model.Reimbursement;
 import com.revature.repository.ErsUserDao;
@@ -21,8 +26,7 @@ import com.revature.util.HibernateUtil;
 public class CompanyEmployeeUser extends ErsUser implements Employee {
 
 	@Override
-	public void submitReimbursementReq(HttpServletRequest req) {
-		String id = req.getParameter("id");
+	public void submitReimbursementReq(HttpServletRequest req) throws IOException {
 		String amount = req.getParameter("amount");
 		String description = req.getParameter("description");
 		String type = req.getParameter("type");
@@ -30,9 +34,8 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 		ReimbursementTypeDao rtDao = HibernateUtil.getRimbursementTypeDao();
 		ReimbursementStatusDao rsDao = HibernateUtil.getRimbursementStatusDao();
 
-		// save everything except receipt image & author
+		// save everything except id (auto-generated), receipt image, & author
 		Reimbursement rmbmt = new Reimbursement();
-		rmbmt.setId(Integer.parseInt(id));
 		rmbmt.setAmount(Double.parseDouble(amount));
 		rmbmt.setDescription(description);
 		rmbmt.setAuthor(this);
@@ -45,10 +48,11 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 
 		// save byte[] provided by user (if provided)
 		boolean isSet = false;
-		Part content = null;;
-		
+		Part content = null;
+		;
+
 		try {
-			content = req.getPart("content");
+			content = req.getPart("receipt");
 			isSet = true;
 		} catch (Exception e) {
 			isSet = false;
@@ -63,21 +67,21 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 	}
 
 	@Override
-	public boolean uploadImage(Part content, Reimbursement rmbmt) {
+	public boolean uploadImage(Part content, Reimbursement rmbmt) throws IOException {
 		InputStream is = null;
 		ByteArrayOutputStream os = null;
 		boolean isSuccessfull = false;
-		
+
 		try {
 			is = content.getInputStream();
 			os = new ByteArrayOutputStream();
-			
+
 			byte[] buffer = new byte[1024];
-			
+
 			while (is.read(buffer) != -1) {
 				os.write(buffer);
 			}
-			
+
 			rmbmt.setRecipt(os.toByteArray());
 			isSuccessfull = true;
 		} catch (IOException e) {
@@ -85,42 +89,48 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 			e.printStackTrace();
 			isSuccessfull = false;
 		} finally {
-			try {
-				if (is != null)
-					is.close();
-				if (os != null)
-					os.close();
-			} catch (IOException e) {
-				e.getStackTrace();
-				isSuccessfull = false;
-			}
+			if (is != null)
+				is.close();
+			if (os != null)
+				os.close();
 		}
-		
+
 		return isSuccessfull;
 	}
 
 	@Override
-	public boolean viewPendingReimbursementReqs(HttpServletRequest req) {
+	public boolean viewPendingReimbursementReqs(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
 		List<Reimbursement> rmbmtList = dao.getReimbursementsByUsernameAndStatus(getUsername(), "pending");
 
 		if (rmbmtList.isEmpty()) {
 			return false;
 		} else {
-			req.getSession().setAttribute("reimbursements", rmbmtList);
+			resp.setContentType("text/xml");
+			ObjectMapper om = new XmlMapper();
+
+			for (Reimbursement r : rmbmtList) {
+				String obj = om.writeValueAsString(r);
+				PrintWriter pw = resp.getWriter();
+				pw.print(obj);
+				pw.close();
+			}
+
+			req.getSession().setAttribute("pendingList", rmbmtList);
 			return true;
 		}
 	}
 
 	@Override
-	public boolean viewResolvedReimbursementReqs(HttpServletRequest req) {
+	public boolean viewResolvedReimbursementReqs(HttpServletRequest req, HttpServletResponse resp) throws JsonProcessingException {
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
 		List<Reimbursement> rmbmtList = dao.getReimbursementsByUsernameAndStatus(getUsername(), "resolved");
 
 		if (rmbmtList.isEmpty()) {
 			return false;
 		} else {
-			req.getSession().setAttribute("reimbursements", rmbmtList);
+			req.getSession().setAttribute("resolvedList", rmbmtList);
 			return true;
 		}
 	}

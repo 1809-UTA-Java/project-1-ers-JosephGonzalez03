@@ -12,4 +12,28 @@
 		<servlet-name>LogoutServlet</servlet-name>
 		<servlet-class>com.revature.servlet.LogoutServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ViewPersonalInfo</servlet-name>
+		<display-name>ViewPersonalInfo</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.ViewPersonalInfo</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ViewPersonalInfoServlet</servlet-name>
+		<display-name>ViewPersonalInfoServlet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.ViewPersonalInfoServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ViewEmployeeReimbursementsServlet</servlet-name>
+		<display-name>ViewEmployeeReimbursementsServlet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.ViewEmployeeReimbursementsServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SubmitReimbursementFormServlet</servlet-name>
+		<display-name>SubmitReimbursementFormServlet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.SubmitReimbursementFormServlet</servlet-class>
+	</servlet>
 </web-app>
