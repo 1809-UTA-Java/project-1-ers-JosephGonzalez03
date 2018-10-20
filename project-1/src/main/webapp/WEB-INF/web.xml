@@ -36,4 +36,34 @@
 		<description></description>
 		<servlet-class>com.revature.servlet.SubmitReimbursementFormServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ViewAllEmployeesServlet</servlet-name>
+		<display-name>ViewAllEmployeesServlet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.ViewAllEmployeesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ViewResolvedReimbursementsServlet</servlet-name>
+		<display-name>ViewResolvedReimbursementsServlet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.ViewResolvedReimbursementsServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ViewPendingReimbursementsServlet</servlet-name>
+		<display-name>ViewPendingReimbursementsServlet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.ViewPendingReimbursementsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewAllEmployeesServlet</servlet-name>
+		<url-pattern>/ViewAllEmployeesServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ViewResolvedReimbursementsServlet</servlet-name>
+		<url-pattern>/ViewResolvedReimbursementsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ViewPendingReimbursementsServlet</servlet-name>
+		<url-pattern>/ViewPendingReimbursementsServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -10,7 +10,7 @@ import com.revature.model.ErsUser;
 import com.revature.model.Reimbursement;
 
 public interface Employee {
-	void submitReimbursementReq(Reimbursement rmbmt);
+	void submitReimbursementReq(double amount, String description, String type);
 
 	boolean uploadImage(Part content, Reimbursement rmbmt) throws IOException;
 

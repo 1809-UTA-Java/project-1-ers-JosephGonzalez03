@@ -11,7 +11,6 @@ public class ReimbursementStatusDao {
 		Session session = HibernateUtil.getSession();
 		return (ReimbursementStatus) session.createCriteria(ReimbursementStatus.class)
 				.add(Restrictions.eq("status", status))
-				.list()
-				.get(0);
+				.uniqueResult();
 	}
 }

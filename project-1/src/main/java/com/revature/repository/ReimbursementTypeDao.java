@@ -11,7 +11,6 @@ public class ReimbursementTypeDao {
 		Session session = HibernateUtil.getSession();
 		return (ReimbursementType) session.createCriteria(ReimbursementType.class)
 				.add(Restrictions.eq("type", type))
-				.list()
-				.get(0);
+				.uniqueResult();
 	}
 }

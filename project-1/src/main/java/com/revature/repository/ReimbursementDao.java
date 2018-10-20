@@ -43,7 +43,7 @@ public class ReimbursementDao {
 		Session session = HibernateUtil.getSession();
 		return (Reimbursement) session.createCriteria(Reimbursement.class)
 				.add(Restrictions.eq("id", id))
-				.list().get(0);
+				.uniqueResult();
 	}
 	
 	public int saveReimbursement(Reimbursement r) {

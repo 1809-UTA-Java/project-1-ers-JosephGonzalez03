@@ -25,7 +25,7 @@ public class CompanyManagerUser extends ErsUser implements Manager {
 		// load reimbursement under review
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
 		Reimbursement rmbmt = dao.getReimbursementById(rmbmtId);
-
+		System.out.println("" + rmbmt.getId());
 		// load reimbursement status from database
 		ReimbursementStatusDao rsDao = HibernateUtil.getRimbursementStatusDao();
 		ReimbursementStatus rs = rsDao.getReimbursementStatusByStatus(reviewOption);

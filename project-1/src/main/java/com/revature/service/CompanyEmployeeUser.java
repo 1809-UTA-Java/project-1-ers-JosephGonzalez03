@@ -3,6 +3,8 @@ package com.revature.service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.Part;
@@ -11,6 +13,8 @@ import com.revature.model.ErsUser;
 import com.revature.model.Reimbursement;
 import com.revature.repository.ErsUserDao;
 import com.revature.repository.ReimbursementDao;
+import com.revature.repository.ReimbursementStatusDao;
+import com.revature.repository.ReimbursementTypeDao;
 import com.revature.util.HibernateUtil;
 
 public class CompanyEmployeeUser extends ErsUser implements Employee {
@@ -21,7 +25,22 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 	}
 
 	@Override
-	public void submitReimbursementReq(Reimbursement rmbmt) {
+	public void submitReimbursementReq(double amount, String description, String type) {
+		Reimbursement rmbmt = new Reimbursement();
+		
+		// save everything except id (auto-generated), receipt image, & author
+		ReimbursementTypeDao rtDao = HibernateUtil.getRimbursementTypeDao();
+		ReimbursementStatusDao rsDao = HibernateUtil.getRimbursementStatusDao();
+		rmbmt.setAmount(amount);
+		rmbmt.setDescription(description);
+		rmbmt.setAuthor(this);
+		rmbmt.setReimbursementType(rtDao.getReimbursementTypeByType(type));
+		rmbmt.setReimbursementStatus(rsDao.getReimbursementStatusByStatus("pending"));
+
+		// save time submitted as current time when method is executed
+		LocalDateTime time = LocalDateTime.now();
+		rmbmt.setSubmitted_ts(Timestamp.valueOf(time));
+		
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
 		dao.saveReimbursement(rmbmt);
 	}
