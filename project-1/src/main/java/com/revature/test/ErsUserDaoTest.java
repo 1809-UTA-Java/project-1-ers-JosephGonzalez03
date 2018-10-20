@@ -1,11 +1,12 @@
 package com.revature.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,12 @@ import com.revature.model.UserRole;
 import com.revature.repository.ErsUserDao;
 import com.revature.util.HibernateUtil;
 
+/**
+ * 
+ * @author Joseph
+ * NOTE: comment out transaction stuff in saveUser or 
+ * else rollback won't work & tests will fail
+ */
 public class ErsUserDaoTest {
 
 	ErsUser u1 = new ErsUser();
@@ -23,8 +30,6 @@ public class ErsUserDaoTest {
 
 	@Before
 	public void setUp() throws Exception {
-		ErsUserDao dao = HibernateUtil.getErsUserDao();
-
 		u1.setId(12345);
 		u1.setUsername("josephdg3");
 		u1.setPassword("pass");
@@ -40,54 +45,67 @@ public class ErsUserDaoTest {
 		u2.setLastName("Gabe");
 		u2.setEmail("john01@test.com");
 		u2.setUserRole(new UserRole(101, "manager"));
-
-		dao.saveUser(u1);
-		dao.saveUser(u2);
 	}
 
 
 	@After
 	public void tearDown() throws Exception {
-		ErsUserDao dao = HibernateUtil.getErsUserDao();
-		dao.deleteUser(u1);
-		dao.deleteUser(u2);
 		users.clear();
 	}
 
-//	@Test
-//	public void testGetAllUsers() {
-//		users.add(u1);
-//		users.add(u2);
-//		
-//		ErsUserDao dao = HibernateUtil.getErsUserDao();
-//		List<ErsUser> actual = dao.getAllUsers();
-//		boolean areSame = users.containsAll(actual);
-//		
-//		assertEquals(true, areSame);
-//	}
+	@Test
+	public void testGetAllUsers() {
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		
+		ErsUserDao dao = HibernateUtil.getErsUserDao();
+		try {
+			dao.saveUser(u1);
+			dao.saveUser(u2);
+			users.add(u1);
+			users.add(u2);
+			List<ErsUser> actual = dao.getAllUsers();
+			boolean areSame = users.containsAll(actual);
+			assertEquals(true, areSame);
+		} finally {
+			tx.rollback();
+		}
+		
+	}
 
 	@Test
 	public void testGetErsUserByUsername() {
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		
 		ErsUserDao dao = HibernateUtil.getErsUserDao();
-		ErsUser actual = dao.getErsUserByUsername(u1.getUsername());
-
-		assertEquals(u1, actual);
+		
+		try {
+			dao.saveUser(u1);
+			dao.saveUser(u2);
+			ErsUser actual = dao.getErsUserByUsername(u1.getUsername());
+			assertEquals(u1, actual);
+		} finally {
+			tx.rollback();
+		}
 	}
 
 	@Test
 	public void testGetErsUsersByRole() {
-		users.add(u1);
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
 		
 		ErsUserDao dao = HibernateUtil.getErsUserDao();
-		List<ErsUser> actual = dao.getErsUsersByRole(u1.getUserRole().getRole());
-		boolean areSame = users.containsAll(actual);
-
-		assertEquals(true, areSame);
+		try {
+			dao.saveUser(u1);
+			dao.saveUser(u2);
+			users.add(u1);
+			List<ErsUser> actual = dao.getErsUsersByRole(u1.getUserRole().getRole());
+			boolean areSame = users.containsAll(actual);
+			assertEquals(true, areSame);
+		} finally {
+			tx.rollback();
+		}
 	}
-
-//	@Test
-//	public void testUpdateErsUser() {
-//		fail("Not yet implemented");
-//	}
 
 }

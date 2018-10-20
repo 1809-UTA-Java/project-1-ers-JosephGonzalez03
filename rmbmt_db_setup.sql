@@ -46,6 +46,16 @@ create table ers_reimbursements (
 
 insert into ers_user_roles values (100,'employee');
 insert into ers_user_roles values (101,'manager');
+
+insert into ers_reimbursement_status values (100,'pending');
+insert into ers_reimbursement_status values (101,'approved');
+insert into ers_reimbursement_status values (102,'denied');
+
+insert into ers_reimbursement_type values (100,'travel');
+insert into ers_reimbursement_type values (101,'supplies');
+insert into ers_reimbursement_type values (102,'meals');
+insert into ers_reimbursement_type values (103,'hotel');
+
 commit;
 
 select * from ers_users;

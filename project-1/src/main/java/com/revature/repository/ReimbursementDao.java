@@ -12,46 +12,57 @@ import com.revature.util.HibernateUtil;
 
 public class ReimbursementDao {
 	@SuppressWarnings("unchecked")
+	public List<Reimbursement> getReimbursementsByUsername(String username) {
+		Session session = HibernateUtil.getSession();
+		String hql = "from Reimbursement r where r.author.username = :username";
+		Query query = session.createQuery(hql);
+		query.setString("username", username);
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Reimbursement> getReimbursementsByStatus(String status) {
 		Session session = HibernateUtil.getSession();
-		return session.createCriteria(Reimbursement.class)
-				.add(Restrictions.eq("ReimbursementStatus.status", status))
-				.list();
+		String hql = "from Reimbursement r where r.reimbursementStatus.status = :status";
+		Query query = session.createQuery(hql);
+		query.setString("status", status);
+		return query.list();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Reimbursement> getReimbursementsByUsernameAndStatus(String username, String status) {
 		Session session = HibernateUtil.getSession();
-		return session.createCriteria(Reimbursement.class)
-				.add(Restrictions.eq("username", username))
-				.add(Restrictions.eq("ReimbursementStatus.status", status))
-				.list();
-	}
+		String hql = "from Reimbursement r where r.author.username = :username and r.reimbursementStatus.status = :status";
+		Query query = session.createQuery(hql);
+		query.setString("username", username);
+		query.setString("status", status);
+		return query.list();
+		}
 	
 	public Reimbursement getReimbursementById(int id) {
 		Session session = HibernateUtil.getSession();
 		return (Reimbursement) session.createCriteria(Reimbursement.class)
-				.add(Restrictions.eq("ReimbursementStatus.id", id))
+				.add(Restrictions.eq("id", id))
 				.list().get(0);
 	}
 	
 	public int saveReimbursement(Reimbursement r) {
 		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
+//		Transaction tx = session.beginTransaction();
 		int result = (int) session.save(r);
-		tx.commit();
+//		tx.commit();
 		return result;
 	}
 	
 	public boolean updateReimbursement(Reimbursement r) {
 		Session session = HibernateUtil.getSession();
 		String hql = "update Reimbursement set resolver = :resolver, " +
-					 "reimbursementStatus = :newStatus" + 
+					 "reimbursementStatus = :newStatus " + 
 					"where id = :id";
 		Query query = session.createQuery(hql);
 		query.setEntity("resolver", r.getResolver());
 		query.setEntity("newStatus", r.getReimbursementStatus());
-		query.setInteger("id", r.getId());
+		query.setInteger("r.id", r.getId());
 		
 		if(query.executeUpdate() > 0) {
 			return true;

@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.revature.model.ErsUser;
@@ -7,10 +9,10 @@ import com.revature.model.Reimbursement;
 import com.revature.model.User;
 
 public interface Manager {
-	boolean reviewPendingReimbursementReqs(HttpServletRequest req);
+	boolean reviewPendingReimbursementReq(int rmbmtId, String reviewOption);
 	boolean viewImage(Reimbursement rmbmt);
-	boolean viewAllPendingReimbursementReqs(HttpServletRequest req);
-	boolean viewAllResolvedReimbursementReqs(HttpServletRequest req);
-	boolean viewAllEmployees(HttpServletRequest req);
-	boolean viewReimbursementReqs(HttpServletRequest req, ErsUser user);
+	List<Reimbursement> viewAllPendingReimbursementReqs();
+	List<Reimbursement> viewAllResolvedReimbursementReqs();
+	List<ErsUser> viewAllEmployees();
+	List<Reimbursement> viewReimbursementReqs(ErsUser user);
 }

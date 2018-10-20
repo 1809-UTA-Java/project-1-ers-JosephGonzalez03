@@ -1,26 +1,26 @@
 package com.revature.service;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.revature.model.ErsUser;
 import com.revature.model.Reimbursement;
 
 public interface Employee {
-	void submitReimbursementReq(HttpServletRequest req) throws IOException;
+	void submitReimbursementReq(Reimbursement rmbmt);
 
 	boolean uploadImage(Part content, Reimbursement rmbmt) throws IOException;
 
-	boolean viewPendingReimbursementReqs(HttpServletRequest req, HttpServletResponse resp)
+	List<Reimbursement>viewPendingReimbursementReqs()
 			throws JsonProcessingException, IOException;
 
-	boolean viewResolvedReimbursementReqs(HttpServletRequest req, HttpServletResponse resp)
+	List<Reimbursement> viewResolvedReimbursementReqs()
 			throws JsonProcessingException, IOException;
 
-	void viewInfo(HttpServletRequest req);
+	ErsUser viewInfo();
 
-	boolean updateInfo(HttpServletRequest req);
+	void updateInfo(ErsUser u);
 }

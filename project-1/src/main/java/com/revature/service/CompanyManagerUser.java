@@ -1,8 +1,8 @@
 package com.revature.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import com.revature.model.ErsUser;
 import com.revature.model.Reimbursement;
@@ -14,21 +14,27 @@ import com.revature.util.HibernateUtil;
 
 public class CompanyManagerUser extends ErsUser implements Manager {
 
+	public CompanyManagerUser(ErsUser u) {
+		super(u.getId(), u.getUsername(), u.getPassword(), u.getFirstName(), u.getLastName(), u.getEmail(),
+				u.getUserRole());
+	}
+
 	@Override
-	public boolean reviewPendingReimbursementReqs(HttpServletRequest req) {
-		int rmbmtId = Integer.parseInt(req.getParameter("rmbmtId"));
-		String reviewOption = req.getParameter("reviewOption");
-		
+	public boolean reviewPendingReimbursementReq(int rmbmtId, String reviewOption) {
+
 		// load reimbursement under review
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
 		Reimbursement rmbmt = dao.getReimbursementById(rmbmtId);
-		
+
 		// load reimbursement status from database
 		ReimbursementStatusDao rsDao = HibernateUtil.getRimbursementStatusDao();
 		ReimbursementStatus rs = rsDao.getReimbursementStatusByStatus(reviewOption);
 		rmbmt.setReimbursementStatus(rs);
-		
-		// update reimbursement in database
+
+		// save time submitted as current time when method is executed
+		LocalDateTime time = LocalDateTime.now();
+		rmbmt.setResolved_ts(Timestamp.valueOf(time));
+
 		return dao.updateReimbursement(rmbmt);
 	}
 
@@ -39,58 +45,27 @@ public class CompanyManagerUser extends ErsUser implements Manager {
 	}
 
 	@Override
-	public boolean viewAllPendingReimbursementReqs(HttpServletRequest req) {
+	public List<Reimbursement> viewAllPendingReimbursementReqs() {
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
-		List<Reimbursement> rmbmtList = dao.getReimbursementsByStatus("pending");
-		
-		if (rmbmtList.isEmpty()) {
-			return false;
-		} else {
-			req.getSession().setAttribute("pendingList", rmbmtList);
-			return true;
-		}
-	
+		return dao.getReimbursementsByStatus("pending");
 	}
 
 	@Override
-	public boolean viewAllResolvedReimbursementReqs(HttpServletRequest req) {
+	public List<Reimbursement> viewAllResolvedReimbursementReqs() {
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
-		List<Reimbursement> rmbmtList = dao.getReimbursementsByStatus("resolved");
-		
-		if (rmbmtList.isEmpty()) {
-			return false;
-		} else {
-			req.getSession().setAttribute("resolvedList", rmbmtList);
-			return true;
-		}
+		return dao.getReimbursementsByStatus("resolved");
 	}
 
 	@Override
-	public boolean viewAllEmployees(HttpServletRequest req) {
+	public List<ErsUser> viewAllEmployees() {
 		ErsUserDao dao = HibernateUtil.getErsUserDao();
-		List<ErsUser> usersList = dao.getAllUsers();
-		
-		if (usersList.isEmpty()) {
-			return false;
-		} else {
-			req.getSession().setAttribute("users", usersList);
-			return true;
-		}
+		return dao.getErsUsersByRole("employee");
 	}
 
 	@Override
-	public boolean viewReimbursementReqs(HttpServletRequest req, ErsUser user) {
+	public List<Reimbursement> viewReimbursementReqs(ErsUser user) {
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
-		List<Reimbursement> rmbmtList = dao.getReimbursementsByUsernameAndStatus(user.getUsername(),"resolved");
-		
-		rmbmtList.addAll(dao.getReimbursementsByUsernameAndStatus(user.getUsername(),"pending"));
-		
-		if (rmbmtList.isEmpty()) {
-			return false;
-		} else {
-			req.getSession().setAttribute("requestList", rmbmtList);
-			return true;
-		}
+		return dao.getReimbursementsByUsername(user.getUsername());
 	}
 
 }

@@ -62,8 +62,8 @@
 			<tr>
 				<td>ACTION:</td>
 				<td><select name="reviewOption">
-						<option value="approve">approve</option>
-						<option value="deny">deny</option>
+						<option value="approved">approve</option>
+						<option value="denied">deny</option>
 				</select></td>
 			</tr>
 
