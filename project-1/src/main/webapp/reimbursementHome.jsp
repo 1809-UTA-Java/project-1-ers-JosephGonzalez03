@@ -6,7 +6,7 @@
 <%List<Reimbursement> resolvedList = (ArrayList<Reimbursement>) session.getAttribute("resolvedList");%>
 <html>
 <head>
-<title>Insert title here</title>
+<title>Reimbursement Home</title>
 <link rel="stylesheet" type="text/css" href="styles/custom.css">
 </head>
 <body>
@@ -34,6 +34,7 @@
 				<td><%=rmbmt.getAmount()%></td>
 				<td><%=rmbmt.getDescription()%></td>
 				<td><%=rmbmt.getSubmitted_ts()%></td>
+				<td><%=rmbmt.getResolved_ts()%></td>
 				<td><%=rmbmt.getReimbursementType().getType()%></td>
 			</tr>
 			<%
@@ -62,22 +63,20 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
 				<%
 					for (Reimbursement rmbmt : resolvedList) {
 				%>
+			<tr>
 				<td><%=rmbmt.getId()%></td>
 				<td><%=rmbmt.getAmount()%></td>
 				<td><%=rmbmt.getDescription()%></td>
 				<td><%=rmbmt.getSubmitted_ts()%></td>
 				<td><%=rmbmt.getResolved_ts()%></td>
 				<td><%=rmbmt.getReimbursementType().getType()%></td>
+			</tr>
 				<%
 					}
 				%>
-
-
-			</tr>
 		</tbody>
 	</table>
 

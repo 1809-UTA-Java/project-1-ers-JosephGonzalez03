@@ -36,7 +36,7 @@ public class ViewPersonalInfoServlet extends HttpServlet {
 			ErsUser mUser = dao.getErsUserByUsername(eUsername);
 			CompanyEmployeeUser employee = new CompanyEmployeeUser(mUser);
 
-			request.setAttribute("user", employee.viewInfo());
+			request.getSession().setAttribute("user", employee.viewInfo());
 			request.getRequestDispatcher("personalInfo.jsp").forward(request, response);
 		}
 	}

@@ -5,10 +5,11 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
-	List<ErsUser> users = (ArrayList<ErsUser>) session.getAttribute("users");
+	List<ErsUser> uList = (ArrayList<ErsUser>) session.getAttribute("users");
 %>
 <html>
 <head>
+<link rel="stylesheet" href="styles/custom.css">
 <meta charset="ISO-8859-1">
 <title>EMPLOYEES DIRECTORY</title>
 </head>
@@ -28,7 +29,7 @@
 
 			<!--foreach to generate full table-->
 			<%
-				for (ErsUser u: users) {
+				for (ErsUser u: uList) {
 			%>
 			<tr>
 				<td><%=u.getId()%></td>

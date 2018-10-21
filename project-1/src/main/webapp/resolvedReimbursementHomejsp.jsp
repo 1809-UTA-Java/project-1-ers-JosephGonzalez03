@@ -7,13 +7,14 @@
 <%
 	List<Reimbursement> resolvedList = (ArrayList<Reimbursement>) session.getAttribute("resolvedList");
 %>
-
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>RESOLVED REIMBURSEMENTS</title>
+<title>Pending Reimbursements</title>
+<link rel="stylesheet" href="styles/custom.css">
 </head>
 <body>
+
 	<table>
 		<thead>
 			<tr>
@@ -25,8 +26,6 @@
 				<th>TIME RESOLVED</th>
 				<th>EMPLOYEE</th>
 				<th>TYPE</th>
-				<th>ACTION</th>
-				<th>SUBMIT</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,9 +38,10 @@
 				<td><%=rmbmt.getId()%></td>
 				<td><%=rmbmt.getAmount()%></td>
 				<td><%=rmbmt.getDescription()%></td>
-				<td><%=%></td>
+				<td><%=rmbmt.getRecipt()%></td>
 				<td><%=rmbmt.getSubmitted_ts()%></td>
 				<td><%=rmbmt.getResolved_ts()%></td>
+				<td><%=rmbmt.getAuthor().getUsername()%></td>
 				<td><%=rmbmt.getReimbursementType().getType()%></td>
 			</tr>
 			<%

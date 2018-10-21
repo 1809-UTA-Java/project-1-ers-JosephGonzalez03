@@ -1,5 +1,9 @@
+<%@page import="com.revature.model.ErsUser"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="com.revature.model.ErsUser"%>
+<%ErsUser user = (ErsUser) session.getAttribute("user"); %>
+	
 <html>
 
 <head>
@@ -18,26 +22,26 @@
 		<tbody>
 			<tr>
 				<td>User Name:</td>
-				<td>${user.username}</td>
+				<td><%=user.getUsername() %></td>
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td>${user.password}</td>
+				<td><%=user.getPassword() %></td>
 			</tr>
 
 			<tr>
 				<td>First Name:</td>
-				<td>${user.firstName}</td>
+				<td><%=user.getFirstName() %></td>
 			</tr>
 
 			<tr>
 				<td>Last Name:</td>
-				<td>${user.lastName}</td>
+				<td><%=user.getLastName() %></td>
 			</tr>
 
 			<tr>
 				<td>Email:</td>
-				<td>${user.email}</td>
+				<td><%=user.getEmail() %></td>
 			</tr>
 		</tbody>
 	</table>
@@ -46,17 +50,11 @@
 	<br>
 
 	<h1>UPDATE FORM</h1>
-	--ADD SERVLET LATER
 	<form action="UpdatePersonalInfo" method="post">
 		<table>
 			<tr>
 				<th>New</th>
 				<th>Value</th>
-			</tr>
-
-			<tr>
-				<td>User Name:</td>
-				<td><input type="text" name="userName" required="required"></td>
 			</tr>
 			<tr>
 				<td>Password:</td>

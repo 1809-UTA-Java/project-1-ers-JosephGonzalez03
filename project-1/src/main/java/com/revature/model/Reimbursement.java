@@ -6,16 +6,21 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ers_reimbursements")
 public class Reimbursement {
 	@Id
-	@Column(name = "r_id")
+	@GeneratedValue (strategy= GenerationType.SEQUENCE, generator="seqGen")
+	@SequenceGenerator(name = "seqGen", sequenceName = "sequence_1")
+	@Column(name = "r_id", updatable = false, nullable = false)
 	private int id;
 	@Column(name = "r_amount")
 	private double amount;

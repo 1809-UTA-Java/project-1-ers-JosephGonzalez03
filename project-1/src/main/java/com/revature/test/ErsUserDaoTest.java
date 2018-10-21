@@ -20,7 +20,7 @@ import com.revature.util.HibernateUtil;
 /**
  * 
  * @author Joseph
- * NOTE: comment out transaction stuff in saveUser or 
+ * NOTE: comment out transaction stuff in saveUser & updateUser or 
  * else rollback won't work & tests will fail
  */
 public class ErsUserDaoTest {

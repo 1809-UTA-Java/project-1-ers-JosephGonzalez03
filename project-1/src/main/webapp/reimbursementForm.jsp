@@ -32,7 +32,7 @@
 			</tr>
 
 		</table>
-		<button type="submit">Update</button>
+		<button type="submit">Submit</button>
 	</form>
 </body>
 </html>

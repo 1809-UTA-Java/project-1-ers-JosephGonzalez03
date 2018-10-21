@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <html>
 <head>
+<link rel="stylesheet" href="styles/custom.css">
 <meta charset="ISO-8859-1">
 <title>MANAGER HOMEPAGE</title>
 </head>

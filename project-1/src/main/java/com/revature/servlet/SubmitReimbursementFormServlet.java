@@ -3,6 +3,7 @@ package com.revature.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,12 +18,14 @@ import com.revature.util.HibernateUtil;
 /**
  * Servlet implementation class SubmitReimbursementFormServlet
  */
+@WebServlet("/SubmitReimbursementForm")
 public class SubmitReimbursementFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: submit reimbursement form here
 		HttpSession session = request.getSession(false);
@@ -49,7 +52,7 @@ public class SubmitReimbursementFormServlet extends HttpServlet {
 
 			employee.submitReimbursementReq(amount, description, content, type);
 			
-			request.getRequestDispatcher("reimbursementHome.jsp").forward(request, response);;
+			request.getRequestDispatcher("ViewEmployeeReimbursements").forward(request, response);;
 	
 		}
 	}

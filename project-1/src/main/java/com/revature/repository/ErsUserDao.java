@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.revature.model.ErsUser;
 import com.revature.util.HibernateUtil;
@@ -40,17 +41,17 @@ public class ErsUserDao {
 
 	public int saveUser(ErsUser u) {
 		Session session = HibernateUtil.getSession();
-//		Transaction tx = session.beginTransaction();
+		Transaction tx = session.beginTransaction();
 		int result = (int) session.save(u);
-//		tx.commit();
+		tx.commit();
 		return result;
 	}
 
 	public void updateErsUser(ErsUser u) {
 		Session session = HibernateUtil.getSession();
-//		Transaction tx = session.beginTransaction();
+		Transaction tx = session.beginTransaction();
 		session.update(u);
-//		tx.commit();
+		tx.commit();
 	}
 
 	public boolean deleteUser(ErsUser u) {

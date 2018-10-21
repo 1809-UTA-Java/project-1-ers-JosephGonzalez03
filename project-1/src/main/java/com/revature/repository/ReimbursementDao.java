@@ -51,9 +51,9 @@ public class ReimbursementDao {
 	
 	public int saveReimbursement(Reimbursement r) {
 		Session session = HibernateUtil.getSession();
-//		Transaction tx = session.beginTransaction();
+		Transaction tx = session.beginTransaction();
 		int result = (int) session.save(r);
-//		tx.commit();
+		tx.commit();
 		return result;
 	}
 	

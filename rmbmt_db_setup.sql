@@ -44,6 +44,13 @@ create table ers_reimbursements (
     rs_id number(*,0) references ers_reimbursement_status(rs_id)
 );
 
+CREATE SEQUENCE sequence_1
+start with 2004
+increment by 1
+minvalue 2004
+maxvalue 3000
+nocycle;
+
 insert into ers_user_roles values (100,'employee');
 insert into ers_user_roles values (101,'manager');
 
@@ -55,35 +62,5 @@ insert into ers_reimbursement_type values (100,'travel');
 insert into ers_reimbursement_type values (101,'supplies');
 insert into ers_reimbursement_type values (102,'meals');
 insert into ers_reimbursement_type values (103,'hotel');
-
-commit;
-
-
-insert into ers_users values (1000000, 'joeUser', 'pass', 'Joseph', 'Gonzalez', 'joseph@email.com', 100);
-insert into ers_users values (1000001, 'joeGonz', 'pass', 'Joel', 'Gomez', 'josephG@test.com', 100);
-insert into ers_users values (1000002, 'mrJoe', 'pass', 'mister', 'joe', 'mrjoseph@gmail.com', 101);
-
-commit;
-
-select * from ers_users;
-select * from ers_user_roles;
-
-INSERT INTO ers_reimbursements (
-    r_id,
-    r_amount,
-    r_description,
-    r_submitted,
-    u_id_author,
-    rt_id,
-    rs_id
-) VALUES (
-    2000,
-    1000,
-    'travel stuff',
-    CURRENT_TIMESTAMP,
-    1000000,
-    100,
-    100
-);
 
 commit;
