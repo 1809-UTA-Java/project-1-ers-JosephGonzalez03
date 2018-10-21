@@ -1,19 +1,18 @@
 package com.revature.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.revature.model.ErsUser;
 import com.revature.util.HibernateUtil;
 
 /**
  * 
- * @author Joseph
- * NOTE: comment out transaction stuff in saveUser or 
- * else rollback won't work & tests will fail
+ * @author Joseph NOTE: comment out transaction stuff in saveUser or else
+ *         rollback won't work & tests will fail
  */
 public class ErsUserDao {
 
@@ -23,20 +22,22 @@ public class ErsUserDao {
 		return session.createCriteria(ErsUser.class).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	public ErsUser getErsUserByUsername(String username) {
 		Session session = HibernateUtil.getSession();
-		return (ErsUser) session.createQuery("from ErsUser where username= :uname")
-				.setString("uname", username).uniqueResult();
+
+		List<ErsUser> users = new ArrayList<>();
+
+		users = session.createQuery("from ErsUser where username = :username").setString("username", username).list();
+		return users.isEmpty() ? null : users.get(0);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<ErsUser> getErsUsersByRole(String role) {
 		Session session = HibernateUtil.getSession();
-		return session.createQuery("from ErsUser eu where eu.userRole.role = :role")
-				.setString("role", role).list();
+		return session.createQuery("from ErsUser eu where eu.userRole.role = :role").setString("role", role).list();
 	}
 
-	
 	public int saveUser(ErsUser u) {
 		Session session = HibernateUtil.getSession();
 //		Transaction tx = session.beginTransaction();
@@ -57,8 +58,8 @@ public class ErsUserDao {
 		String hql = "delete ErsUser where id = :id";
 		Query query = session.createQuery(hql);
 		query.setInteger("id", u.getId());
-		
-		if(query.executeUpdate() > 0) {
+
+		if (query.executeUpdate() > 0) {
 			return true;
 		} else {
 			return false;
