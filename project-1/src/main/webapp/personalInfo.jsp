@@ -47,7 +47,7 @@
 
 	<h1>UPDATE FORM</h1>
 	--ADD SERVLET LATER
-	<form action="" method="post">
+	<form action="UpdatePersonalInfo" method="post">
 		<table>
 			<tr>
 				<th>New</th>

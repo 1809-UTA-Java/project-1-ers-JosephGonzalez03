@@ -54,16 +54,16 @@
 		<description></description>
 		<servlet-class>com.revature.servlet.ViewPendingReimbursementsServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>ViewAllEmployeesServlet</servlet-name>
-		<url-pattern>/ViewAllEmployeesServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ViewResolvedReimbursementsServlet</servlet-name>
-		<url-pattern>/ViewResolvedReimbursementsServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ViewPendingReimbursementsServlet</servlet-name>
-		<url-pattern>/ViewPendingReimbursementsServlet</url-pattern>
-	</servlet-mapping>
+	<servlet>
+		<servlet-name>ReviewReimbursementServlet</servlet-name>
+		<display-name>ReviewReimbursementServlet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.ReviewReimbursementServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UpdatePersonalInfoServlet</servlet-name>
+		<display-name>UpdatePersonalInfoServlet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.UpdatePersonalInfoServlet</servlet-class>
+	</servlet>
 </web-app>

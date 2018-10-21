@@ -53,7 +53,7 @@
 	<br>
 	<br>
 
-	<form action="" method="post">
+	<form action="ReviewReimbursement" method="post">
 		<table>
 			<tr>
 				<td>ID:</td>

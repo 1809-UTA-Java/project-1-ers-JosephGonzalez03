@@ -39,7 +39,7 @@ create table ers_reimbursements (
     r_submitted timestamp,
     r_resolved timestamp,
     u_id_author number(*,0) references ers_users(u_id),
-    u_id_resolver number(*,0) references ers_users(u_id),
+    u_id_resolver number(*,0),
     rt_id number(*,0) references ers_reimbursement_type(rt_id),
     rs_id number(*,0) references ers_reimbursement_status(rs_id)
 );
@@ -58,5 +58,34 @@ insert into ers_reimbursement_type values (103,'hotel');
 
 commit;
 
+
+insert into ers_users values (1000000, 'joeUser', 'pass', 'Joseph', 'Gonzalez', 'joseph@email.com', 100);
+insert into ers_users values (1000001, 'joeGonz', 'pass', 'Joel', 'Gomez', 'josephG@test.com', 100);
+insert into ers_users values (1000002, 'mrJoe', 'pass', 'mister', 'joe', 'mrjoseph@gmail.com', 101);
+
+commit;
+
 select * from ers_users;
 select * from ers_user_roles;
+
+INSERT INTO ers_reimbursements (
+    r_id,
+    r_amount,
+    r_description,
+    r_receipt,
+    r_submitted,
+    u_id_author,
+    rt_id,
+    rs_id
+) VALUES (
+    2000,
+    1000,
+    'travel stuff',
+    null,
+    CURRENT_TIMESTAMP,
+    1000000,
+    100,
+    100
+);
+
+commit;

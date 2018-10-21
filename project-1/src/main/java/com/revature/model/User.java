@@ -1,7 +1,7 @@
 package com.revature.model;
 
 public interface User {
-	User login(User user);
+	boolean login(String username, String password);
 	boolean viewHomePage();
 	User logout();
 	

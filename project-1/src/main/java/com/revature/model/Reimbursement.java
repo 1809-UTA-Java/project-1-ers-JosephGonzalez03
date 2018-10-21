@@ -12,36 +12,35 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ers_reimbursements")
+@Table(name = "ers_reimbursements")
 public class Reimbursement {
 	@Id
-	@Column(name="r_id")
+	@Column(name = "r_id")
 	private int id;
-	@Column(name="r_amount")
+	@Column(name = "r_amount")
 	private double amount;
-	@Column(name="r_description")
+	@Column(name = "r_description")
 	private String description;
-	@Column(name="r_receipt")
+	@Column(name = "r_receipt")
 	private byte[] recipt;
-	@Column(name="r_submitted")
+	@Column(name = "r_submitted")
 	private Timestamp submitted_ts;
-	@Column(name="r_resolved")
+	@Column(name = "r_resolved")
 	private Timestamp resolved_ts;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="u_id_author", referencedColumnName="u_id")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "u_id_author", referencedColumnName = "u_id")
 	private ErsUser author;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="u_id_resolver", referencedColumnName="u_id")
-	private ErsUser resolver;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="rt_id")
+	@Column(name = "u_id_resolver")
+	private int resolverId;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "rt_id")
 	private ReimbursementType reimbursementType;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="rs_id")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "rs_id")
 	private ReimbursementStatus reimbursementStatus;
 
 	public Reimbursement(int id, double amount, String description, byte[] recipt, Timestamp submitted_ts,
-			Timestamp resolved_ts, ErsUser author, ErsUser resolver, ReimbursementType reimbursementType,
+			Timestamp resolved_ts, ErsUser author, int resolverId, ReimbursementType reimbursementType,
 			ReimbursementStatus reimbursementStatus) {
 		super();
 		this.id = id;
@@ -51,7 +50,7 @@ public class Reimbursement {
 		this.submitted_ts = submitted_ts;
 		this.resolved_ts = resolved_ts;
 		this.author = author;
-		this.resolver = resolver;
+		this.resolverId = resolverId;
 		this.reimbursementType = reimbursementType;
 		this.reimbursementStatus = reimbursementStatus;
 	}
@@ -116,12 +115,12 @@ public class Reimbursement {
 		this.author = author;
 	}
 
-	public ErsUser getResolver() {
-		return resolver;
+	public int getResolverId() {
+		return resolverId;
 	}
 
-	public void setResolver(ErsUser resolver) {
-		this.resolver = resolver;
+	public void setResolverId(int resolverId) {
+		this.resolverId = resolverId;
 	}
 
 	public ReimbursementType getReimbursementType() {

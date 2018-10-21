@@ -26,7 +26,7 @@ public class ErsUserDao {
 	public ErsUser getErsUserByUsername(String username) {
 		Session session = HibernateUtil.getSession();
 		return (ErsUser) session.createQuery("from ErsUser where username= :uname")
-				.setString("uname", username).list().get(0);
+				.setString("uname", username).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")

@@ -107,9 +107,8 @@ public class ErsUser implements User {
 		this.userRole = userRole;
 	}
 
-	public User login(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean login(String username, String password) {
+		return (this.username.contentEquals(username) && this.password.contentEquals(password));
 	}
 
 	public boolean viewHomePage() {

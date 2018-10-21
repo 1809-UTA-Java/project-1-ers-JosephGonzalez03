@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 import com.revature.model.Reimbursement;
 import com.revature.util.HibernateUtil;
@@ -41,9 +40,12 @@ public class ReimbursementDao {
 	
 	public Reimbursement getReimbursementById(int id) {
 		Session session = HibernateUtil.getSession();
-		return (Reimbursement) session.createCriteria(Reimbursement.class)
-				.add(Restrictions.eq("id", id))
-				.uniqueResult();
+		String hql = "from Reimbursement where id = :idVar";
+		return (Reimbursement) session.createQuery(hql).setInteger("idVar",id).uniqueResult();
+		
+//		return (Reimbursement) session.createCriteria(Reimbursement.class)
+//				.add(Restrictions.eq("id", id))
+//				.uniqueResult();
 	}
 	
 	public int saveReimbursement(Reimbursement r) {
@@ -56,13 +58,13 @@ public class ReimbursementDao {
 	
 	public boolean updateReimbursement(Reimbursement r) {
 		Session session = HibernateUtil.getSession();
-		String hql = "update Reimbursement set resolver = :resolver, " +
+		String hql = "update Reimbursement set resolverId = :rID, " +
 					 "reimbursementStatus = :newStatus " + 
 					"where id = :id";
 		Query query = session.createQuery(hql);
-		query.setEntity("resolver", r.getResolver());
+		query.setEntity("resolverId", r.getResolverId());
 		query.setEntity("newStatus", r.getReimbursementStatus());
-		query.setInteger("r.id", r.getId());
+		query.setInteger("id", r.getId());
 		
 		if(query.executeUpdate() > 0) {
 			return true;

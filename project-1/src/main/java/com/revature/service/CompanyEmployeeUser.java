@@ -25,7 +25,7 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 	}
 
 	@Override
-	public void submitReimbursementReq(double amount, String description, String type) {
+	public void submitReimbursementReq(double amount, String description, Part receipt, String type) throws IOException {
 		Reimbursement rmbmt = new Reimbursement();
 		
 		// save everything except id (auto-generated), receipt image, & author
@@ -40,6 +40,10 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 		// save time submitted as current time when method is executed
 		LocalDateTime time = LocalDateTime.now();
 		rmbmt.setSubmitted_ts(Timestamp.valueOf(time));
+		
+		if (receipt != null) {
+			uploadImage(receipt, rmbmt);
+		}
 		
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
 		dao.saveReimbursement(rmbmt);
