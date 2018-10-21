@@ -30,7 +30,7 @@ public class CompanyManagerUser extends ErsUser implements Manager {
 		ReimbursementStatusDao rsDao = HibernateUtil.getRimbursementStatusDao();
 		ReimbursementStatus rs = rsDao.getReimbursementStatusByStatus(reviewOption);
 		rmbmt.setReimbursementStatus(rs);
-		rmbmt.setResolver(eu);
+		rmbmt.setResolverId(eu.getId());
 		
 		// save time submitted as current time when method is executed
 		LocalDateTime time = LocalDateTime.now();
@@ -54,7 +54,9 @@ public class CompanyManagerUser extends ErsUser implements Manager {
 	@Override
 	public List<Reimbursement> viewAllResolvedReimbursementReqs() {
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
-		return dao.getReimbursementsByStatus("resolved");
+		List<Reimbursement> list = dao.getReimbursementsByStatus("approved");
+		list.addAll(dao.getReimbursementsByStatus("denied"));
+		return list;
 	}
 
 	@Override

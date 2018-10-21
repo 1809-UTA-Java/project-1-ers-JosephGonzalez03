@@ -4,6 +4,7 @@ drop table ers_reimbursement_status;
 drop table ers_reimbursement_type;
 drop table ers_users;
 drop table ers_user_roles;
+drop sequence sequence_1;
 
 --create tables for reimbursement system
 create table ers_user_roles (
@@ -39,7 +40,7 @@ create table ers_reimbursements (
     r_submitted timestamp,
     r_resolved timestamp,
     u_id_author number(*,0) references ers_users(u_id),
-    u_id_resolver number(*,0),
+    u_id_resolver number(*,0) default -1,
     rt_id number(*,0) references ers_reimbursement_type(rt_id),
     rs_id number(*,0) references ers_reimbursement_status(rs_id)
 );

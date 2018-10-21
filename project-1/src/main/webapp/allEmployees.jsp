@@ -29,7 +29,7 @@
 
 			<!--foreach to generate full table-->
 			<%
-				for (ErsUser u: uList) {
+				for (ErsUser u : uList) {
 			%>
 			<tr>
 				<td><%=u.getId()%></td>
@@ -43,6 +43,12 @@
 			%>
 		</tbody>
 	</table>
+
+	<form action="PullEmployeeRequests" method="get">
+		Pull Reimbursement Requests for: <input type="text" name="username"
+			required="required" placeholder="employee username">
+		<button type="submit">Search</button>
+	</form>
 
 </body>
 </html>

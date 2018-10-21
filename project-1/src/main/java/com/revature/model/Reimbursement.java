@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name = "ers_reimbursements")
 public class Reimbursement {
 	@Id
-	@GeneratedValue (strategy= GenerationType.SEQUENCE, generator="seqGen")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGen")
 	@SequenceGenerator(name = "seqGen", sequenceName = "sequence_1")
 	@Column(name = "r_id", updatable = false, nullable = false)
 	private int id;
@@ -35,9 +35,8 @@ public class Reimbursement {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "u_id_author", referencedColumnName = "u_id")
 	private ErsUser author;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "u_id_resolver", referencedColumnName = "u_id")
-	private ErsUser resolver;
+	@Column(name = "u_id_resolver")
+	private int resolverId;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "rt_id")
 	private ReimbursementType reimbursementType;
@@ -46,7 +45,7 @@ public class Reimbursement {
 	private ReimbursementStatus reimbursementStatus;
 
 	public Reimbursement(int id, double amount, String description, byte[] recipt, Timestamp submitted_ts,
-			Timestamp resolved_ts, ErsUser author, ErsUser resolver, ReimbursementType reimbursementType,
+			Timestamp resolved_ts, ErsUser author, int resolverId, ReimbursementType reimbursementType,
 			ReimbursementStatus reimbursementStatus) {
 		super();
 		this.id = id;
@@ -56,7 +55,7 @@ public class Reimbursement {
 		this.submitted_ts = submitted_ts;
 		this.resolved_ts = resolved_ts;
 		this.author = author;
-		this.resolver = resolver;
+		this.resolverId = resolverId;
 		this.reimbursementType = reimbursementType;
 		this.reimbursementStatus = reimbursementStatus;
 	}
@@ -121,12 +120,12 @@ public class Reimbursement {
 		this.author = author;
 	}
 
-	public ErsUser getResolver() {
-		return resolver;
+	public int getResolverId() {
+		return resolverId;
 	}
 
-	public void setResolver(ErsUser resolver) {
-		this.resolver = resolver;
+	public void setResolverId(int resolverId) {
+		this.resolverId = resolverId;
 	}
 
 	public ReimbursementType getReimbursementType() {

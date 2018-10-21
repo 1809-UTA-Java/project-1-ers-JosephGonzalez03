@@ -7,11 +7,10 @@
 <title>MANAGER HOMEPAGE</title>
 </head>
 <body>
-	<h1>EMPLOYEE HOMEPAGE</h1>
+	<h1>MANAGER HOMEPAGE</h1>
 	<ul>
-		<li><a href="ViewAllEmployees">View All Employees</a></li>
-		<li><a href="ViewResolvedReimbursements">View Resolved Reimbursements</a></li>
-		<li><a href="ViewPendingReimbursements">Review Pending Reimbursements</a></li>
+		<li><a href="ViewAllEmployees">Look Up Reimbursements by Employee</a></li>
+		<li><a href="ViewPendingReimbursements">Review Reimbursements</a></li>
 	</ul>
 
 	<form action="Logout" method="post">

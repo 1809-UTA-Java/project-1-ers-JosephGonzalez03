@@ -59,11 +59,11 @@ public class ReimbursementDao {
 	
 	public boolean updateReimbursement(Reimbursement r) {
 		Session session = HibernateUtil.getSession();
-		String hql = "update Reimbursement set resolver = :rs, " +
+		String hql = "update Reimbursement set resolverId = :rId, " +
 					 "reimbursementStatus = :newStatus " + 
 					"where id = :id";
 		Query query = session.createQuery(hql);
-		query.setEntity("rs", r.getResolver());
+		query.setEntity("rId", r.getResolverId());
 		query.setEntity("newStatus", r.getReimbursementStatus());
 		query.setInteger("id", r.getId());
 		

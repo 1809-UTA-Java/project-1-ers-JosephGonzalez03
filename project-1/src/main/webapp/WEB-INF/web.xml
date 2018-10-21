@@ -66,4 +66,10 @@
 		<description></description>
 		<servlet-class>com.revature.servlet.UpdatePersonalInfoServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>PullEmployeeRequestsServelet</servlet-name>
+		<display-name>PullEmployeeRequestsServelet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.PullEmployeeRequestsServelet</servlet-class>
+	</servlet>
 </web-app>
