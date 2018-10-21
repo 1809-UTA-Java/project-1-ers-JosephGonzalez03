@@ -57,15 +57,21 @@ public class ReimbursementDao {
 		return result;
 	}
 	
+	public int saveReimbursementTest(Reimbursement r) {
+		Session session = HibernateUtil.getSession();
+		int result = (int) session.save(r);
+		return result;
+	}
+	
 	public boolean updateReimbursement(Reimbursement r) {
 		Session session = HibernateUtil.getSession();
 		String hql = "update Reimbursement set resolverId = :rId, " +
 					 "reimbursementStatus = :newStatus " + 
-					"where id = :id";
+					"where id = :idVar";
 		Query query = session.createQuery(hql);
-		query.setEntity("rId", r.getResolverId());
+		query.setInteger("rId", r.getResolverId());
 		query.setEntity("newStatus", r.getReimbursementStatus());
-		query.setInteger("id", r.getId());
+		query.setInteger("idVar", r.getId());
 		
 		if(query.executeUpdate() > 0) {
 			return true;

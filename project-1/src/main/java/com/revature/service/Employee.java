@@ -14,13 +14,11 @@ public interface Employee {
 
 	boolean uploadImage(Part content, Reimbursement rmbmt) throws IOException;
 
-	List<Reimbursement>viewPendingReimbursementReqs()
-			throws JsonProcessingException, IOException;
+	List<Reimbursement> viewPendingReimbursementReqs() throws JsonProcessingException, IOException;
 
-	List<Reimbursement> viewResolvedReimbursementReqs()
-			throws JsonProcessingException, IOException;
+	List<Reimbursement> viewResolvedReimbursementReqs() throws JsonProcessingException, IOException;
 
 	ErsUser viewInfo();
 
-	void updateInfo(ErsUser u);
+	boolean updateInfo(ErsUser u);
 }

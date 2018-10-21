@@ -72,4 +72,14 @@
 		<description></description>
 		<servlet-class>com.revature.servlet.PullEmployeeRequestsServelet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ViewReceiptServlet</servlet-name>
+		<display-name>ViewReceiptServlet</display-name>
+		<description></description>
+		<servlet-class>com.revature.servlet.ViewReceiptServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewReceiptServlet</servlet-name>
+		<url-pattern>/ViewReceiptServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

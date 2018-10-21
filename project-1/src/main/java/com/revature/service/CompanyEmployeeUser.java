@@ -101,7 +101,7 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 	}
 
 	@Override
-	public void updateInfo(ErsUser u) {
+	public boolean updateInfo(ErsUser u) {
 		ErsUserDao dao = HibernateUtil.getErsUserDao();
 
 		this.setPassword(u.getPassword());
@@ -109,7 +109,7 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 		this.setLastName(u.getLastName());
 		this.setEmail(u.getEmail());
 
-		dao.updateErsUser(this);
+		return dao.updateErsUser(this);
 	}
 
 }

@@ -47,18 +47,24 @@ public class ErsUserDao {
 		return result;
 	}
 
-	public void updateErsUser(ErsUser u) {
+	public int saveUserTest(ErsUser u) {
 		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		session.update(u);
-		tx.commit();
+		int result = (int) session.save(u);
+		return result;
 	}
-
-	public boolean deleteUser(ErsUser u) {
+	
+	public boolean updateErsUser(ErsUser u) {
 		Session session = HibernateUtil.getSession();
-		String hql = "delete ErsUser where id = :id";
+		String hql = "update ErsUser set password = :password, " 
+				+ "firstName = :first, " 
+				+ "lastName = :last, "
+				+ "email = :email where id = :idVar";
 		Query query = session.createQuery(hql);
-		query.setInteger("id", u.getId());
+		query.setString("password", u.getPassword());
+		query.setString("first", u.getFirstName());
+		query.setString("last", u.getLastName());
+		query.setString("email", u.getEmail());
+		query.setInteger("idVar", u.getId());
 
 		if (query.executeUpdate() > 0) {
 			return true;
