@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.revature.model.ErsUser;
 import com.revature.model.Reimbursement;
 import com.revature.util.HibernateUtil;
 
@@ -58,11 +59,11 @@ public class ReimbursementDao {
 	
 	public boolean updateReimbursement(Reimbursement r) {
 		Session session = HibernateUtil.getSession();
-		String hql = "update Reimbursement set resolverId = :rID, " +
+		String hql = "update Reimbursement set resolver = :rs, " +
 					 "reimbursementStatus = :newStatus " + 
 					"where id = :id";
 		Query query = session.createQuery(hql);
-		query.setEntity("resolverId", r.getResolverId());
+		query.setEntity("rs", r.getResolver());
 		query.setEntity("newStatus", r.getReimbursementStatus());
 		query.setInteger("id", r.getId());
 		

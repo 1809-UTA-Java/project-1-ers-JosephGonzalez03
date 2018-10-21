@@ -30,8 +30,9 @@ public class Reimbursement {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "u_id_author", referencedColumnName = "u_id")
 	private ErsUser author;
-	@Column(name = "u_id_resolver")
-	private int resolverId;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "u_id_resolver", referencedColumnName = "u_id")
+	private ErsUser resolver;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "rt_id")
 	private ReimbursementType reimbursementType;
@@ -40,7 +41,7 @@ public class Reimbursement {
 	private ReimbursementStatus reimbursementStatus;
 
 	public Reimbursement(int id, double amount, String description, byte[] recipt, Timestamp submitted_ts,
-			Timestamp resolved_ts, ErsUser author, int resolverId, ReimbursementType reimbursementType,
+			Timestamp resolved_ts, ErsUser author, ErsUser resolver, ReimbursementType reimbursementType,
 			ReimbursementStatus reimbursementStatus) {
 		super();
 		this.id = id;
@@ -50,7 +51,7 @@ public class Reimbursement {
 		this.submitted_ts = submitted_ts;
 		this.resolved_ts = resolved_ts;
 		this.author = author;
-		this.resolverId = resolverId;
+		this.resolver = resolver;
 		this.reimbursementType = reimbursementType;
 		this.reimbursementStatus = reimbursementStatus;
 	}
@@ -115,12 +116,12 @@ public class Reimbursement {
 		this.author = author;
 	}
 
-	public int getResolverId() {
-		return resolverId;
+	public ErsUser getResolver() {
+		return resolver;
 	}
 
-	public void setResolverId(int resolverId) {
-		this.resolverId = resolverId;
+	public void setResolver(ErsUser resolver) {
+		this.resolver = resolver;
 	}
 
 	public ReimbursementType getReimbursementType() {

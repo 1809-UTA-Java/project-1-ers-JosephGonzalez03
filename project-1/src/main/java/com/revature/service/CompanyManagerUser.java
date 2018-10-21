@@ -20,17 +20,17 @@ public class CompanyManagerUser extends ErsUser implements Manager {
 	}
 
 	@Override
-	public boolean reviewPendingReimbursementReq(int rmbmtId, String reviewOption) {
+	public boolean reviewPendingReimbursementReq(ErsUser eu, int rmbmtId, String reviewOption) {
 
 		// load reimbursement under review
 		ReimbursementDao dao = HibernateUtil.getReimbursementDao();
 		Reimbursement rmbmt = dao.getReimbursementById(rmbmtId);
-		System.out.println("" + rmbmt.getId());
+
 		// load reimbursement status from database
 		ReimbursementStatusDao rsDao = HibernateUtil.getRimbursementStatusDao();
 		ReimbursementStatus rs = rsDao.getReimbursementStatusByStatus(reviewOption);
 		rmbmt.setReimbursementStatus(rs);
-		rmbmt.setResolverId(this.getId());
+		rmbmt.setResolver(eu);
 		
 		// save time submitted as current time when method is executed
 		LocalDateTime time = LocalDateTime.now();

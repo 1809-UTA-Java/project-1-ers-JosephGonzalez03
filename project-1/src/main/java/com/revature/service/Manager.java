@@ -9,7 +9,7 @@ import com.revature.model.Reimbursement;
 import com.revature.model.User;
 
 public interface Manager {
-	boolean reviewPendingReimbursementReq(int rmbmtId, String reviewOption);
+	boolean reviewPendingReimbursementReq(ErsUser eu, int rmbmtId, String reviewOption);
 	boolean viewImage(Reimbursement rmbmt);
 	List<Reimbursement> viewAllPendingReimbursementReqs();
 	List<Reimbursement> viewAllResolvedReimbursementReqs();
