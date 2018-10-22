@@ -38,7 +38,7 @@ public class ReviewReimbursementServlet extends HttpServlet {
 			String reviewOption = request.getParameter("reviewOption");
 			
 			manager.reviewPendingReimbursementReq(mUser, rmbmtId, reviewOption);
-			request.getRequestDispatcher("ViewPendingReimbursements").forward(request, response);
+			response.sendRedirect("ViewPendingReimbursements");
 		}
 	}
 

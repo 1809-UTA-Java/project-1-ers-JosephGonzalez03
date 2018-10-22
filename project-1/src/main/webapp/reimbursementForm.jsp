@@ -32,7 +32,7 @@
 			</tr>
 
 		</table>
-		<button type="submit">Submit</button>
+		<button formaction="SubmitReimbursementForm" type="submit">Submit</button>
 	</form>
 </body>
 </html>

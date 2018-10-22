@@ -9,8 +9,10 @@ import com.revature.util.HibernateUtil;
 public class ReimbursementStatusDao {
 	public ReimbursementStatus getReimbursementStatusByStatus(String status) {
 		Session session = HibernateUtil.getSession();
-		return (ReimbursementStatus) session.createCriteria(ReimbursementStatus.class)
+		ReimbursementStatus out = (ReimbursementStatus) session.createCriteria(ReimbursementStatus.class)
 				.add(Restrictions.eq("status", status))
 				.uniqueResult();
+		session.close();
+		return out;
 	}
 }

@@ -20,7 +20,9 @@ public class ErsUserDao {
 	@SuppressWarnings("unchecked")
 	public List<ErsUser> getAllUsers() {
 		Session session = HibernateUtil.getSession();
-		return session.createCriteria(ErsUser.class).list();
+		List<ErsUser> out = session.createCriteria(ErsUser.class).list();
+		session.close();
+		return out;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -30,13 +32,16 @@ public class ErsUserDao {
 		List<ErsUser> users = new ArrayList<>();
 
 		users = session.createQuery("from ErsUser where username = :username").setString("username", username).list();
+		session.close();
 		return users.isEmpty() ? null : users.get(0);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<ErsUser> getErsUsersByRole(String role) {
 		Session session = HibernateUtil.getSession();
-		return session.createQuery("from ErsUser eu where eu.userRole.role = :role").setString("role", role).list();
+		List<ErsUser> out = session.createQuery("from ErsUser eu where eu.userRole.role = :role").setString("role", role).list();
+		session.close();
+		return out;
 	}
 
 	public int saveUser(ErsUser u) {

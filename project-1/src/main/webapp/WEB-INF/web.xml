@@ -13,12 +13,6 @@
 		<servlet-class>com.revature.servlet.LogoutServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>ViewPersonalInfo</servlet-name>
-		<display-name>ViewPersonalInfo</display-name>
-		<description></description>
-		<servlet-class>com.revature.servlet.ViewPersonalInfo</servlet-class>
-	</servlet>
-	<servlet>
 		<servlet-name>ViewPersonalInfoServlet</servlet-name>
 		<display-name>ViewPersonalInfoServlet</display-name>
 		<description></description>
@@ -72,14 +66,4 @@
 		<description></description>
 		<servlet-class>com.revature.servlet.PullEmployeeRequestsServelet</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>ViewReceiptServlet</servlet-name>
-		<display-name>ViewReceiptServlet</display-name>
-		<description></description>
-		<servlet-class>com.revature.servlet.ViewReceiptServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ViewReceiptServlet</servlet-name>
-		<url-pattern>/ViewReceiptServlet</url-pattern>
-	</servlet-mapping>
 </web-app>

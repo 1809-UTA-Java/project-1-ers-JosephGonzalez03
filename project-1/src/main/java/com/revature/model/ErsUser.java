@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.revature.service.CompanyEmployeeUser;
+
 @Entity
 @Table(name="ers_users")
 public class ErsUser implements User {
@@ -47,6 +49,15 @@ public class ErsUser implements User {
 		this.userRole = userRole;
 	}
 
+	public ErsUser(CompanyEmployeeUser e) {
+		this.id = e.getId();
+		this.password = e.getPassword();
+		this.firstName = e.getFirstName();
+		this.lastName = e.getLastName();
+		this.email = e.getEmail();
+		this.userRole = e.getUserRole();
+	}
+	
 	public ErsUser() {
 		super();
 	}

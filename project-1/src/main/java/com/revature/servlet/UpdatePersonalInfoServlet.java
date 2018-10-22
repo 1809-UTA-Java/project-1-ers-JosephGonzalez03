@@ -22,6 +22,7 @@ public class UpdatePersonalInfoServlet extends HttpServlet {
   	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// submit personal info update
 		HttpSession session = request.getSession(false);
@@ -44,7 +45,7 @@ public class UpdatePersonalInfoServlet extends HttpServlet {
 			mUser.setEmail(newEmail);
 			employee.updateInfo(mUser);
 			
-			request.getRequestDispatcher("ViewPersonalInfo").forward(request, response);
+			response.sendRedirect("ViewPersonalInfo");
 		}
 	}
 

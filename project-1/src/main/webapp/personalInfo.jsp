@@ -1,4 +1,3 @@
-<%@page import="com.revature.model.ErsUser"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.revature.model.ErsUser"%>
@@ -25,11 +24,6 @@
 				<td><%=user.getUsername() %></td>
 			</tr>
 			<tr>
-				<td>Password:</td>
-				<td><%=user.getPassword() %></td>
-			</tr>
-
-			<tr>
 				<td>First Name:</td>
 				<td><%=user.getFirstName() %></td>
 			</tr>
@@ -50,7 +44,7 @@
 	<br>
 
 	<h1>UPDATE FORM</h1>
-	<form action="UpdatePersonalInfo" method="post">
+	<form action="/project-1/UpdatePersonalInfo" method="post">
 		<table>
 			<tr>
 				<th>New</th>

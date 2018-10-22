@@ -23,10 +23,12 @@ public class SubmitReimbursementFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO: submit reimbursement form here
 		HttpSession session = request.getSession(false);
 		if (session == null) {
@@ -40,10 +42,10 @@ public class SubmitReimbursementFormServlet extends HttpServlet {
 			double amount = Double.parseDouble(request.getParameter("amount"));
 			String description = request.getParameter("description");
 			String type = request.getParameter("type");
-			
+
 			// save byte[] provided by user (if provided)
 			Part content = null;
-			
+
 			try {
 				content = request.getPart("receipt");
 			} catch (Exception e) {
@@ -51,9 +53,7 @@ public class SubmitReimbursementFormServlet extends HttpServlet {
 			}
 
 			employee.submitReimbursementReq(amount, description, content, type);
-			
-			request.getRequestDispatcher("ViewEmployeeReimbursements").forward(request, response);;
-	
+			response.sendRedirect("ViewEmployeeReimbursements");
 		}
 	}
 }

@@ -108,8 +108,8 @@ public class CompanyEmployeeUser extends ErsUser implements Employee {
 		this.setFirstName(u.getFirstName());
 		this.setLastName(u.getLastName());
 		this.setEmail(u.getEmail());
-
-		return dao.updateErsUser(this);
+		
+		return dao.updateErsUser(new ErsUser(this));
 	}
 
 }
